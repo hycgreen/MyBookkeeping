@@ -1,7 +1,7 @@
-﻿using System;
+﻿using MyBookkeeping.BLL;
+using MyBookkeeping.Models.ViewModel;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace MyBookkeeping.Controllers
@@ -13,9 +13,18 @@ namespace MyBookkeeping.Controllers
             return View();
         }
 
+        [ChildActionOnly]
+        public ActionResult List()
+        {
+            var logic = new AccountingLogic();
+            var models = logic.GetJournal();
+
+            return View(models);
+        }
+
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "MVC5 Homework";
 
             return View();
         }
