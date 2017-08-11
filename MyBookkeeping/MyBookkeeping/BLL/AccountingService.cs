@@ -4,25 +4,18 @@ using System.Collections.Generic;
 
 namespace MyBookkeeping.BLL
 {
-    public class AccountingLogic : IAccountingLogic
+    public class AccountingService : IAccountingService
     {
         private IAccountingDAL _accountingDAL;
 
-        public AccountingLogic()
+        public AccountingService()
         {
+            this._accountingDAL = new AccountingDAL();
         }
 
         public IAccountingDAL AccountingDAL
         {
-            get
-            {
-                if (_accountingDAL == null)
-                {
-                    _accountingDAL = new AccountingDAL();
-                }
-
-                return this._accountingDAL;
-            }
+            get { return this._accountingDAL; }
             set { this._accountingDAL = value; }
         }
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MyBookkeeping.BLL
 {
-    public interface IAccountingLogic
+    public interface IAccountingService
     {
         IAccountingDAL AccountingDAL { get; set; }
 

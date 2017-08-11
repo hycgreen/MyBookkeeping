@@ -16,7 +16,7 @@ namespace MyBookkeeping.Controllers
         [ChildActionOnly]
         public ActionResult List()
         {
-            var logic = new AccountingLogic();
+            var logic = new AccountingService();
             var models = logic.GetJournal();
 
             return View(models);
