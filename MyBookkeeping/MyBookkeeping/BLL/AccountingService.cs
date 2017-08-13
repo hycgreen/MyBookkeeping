@@ -1,27 +1,32 @@
-﻿using MyBookkeeping.DAL;
+﻿using MyBookkeeping.Models;
 using MyBookkeeping.Models.ViewModel;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 
-namespace MyBookkeeping.BLL
+namespace MyBookkeeping.Service
 {
     public class AccountingService : IAccountingService
     {
-        private IAccountingDAL _accountingDAL;
+        private readonly BookkeppingContext _db;
 
         public AccountingService()
         {
-            this._accountingDAL = new AccountingDAL();
+            this._db = new BookkeppingContext();
         }
 
-        public IAccountingDAL AccountingDAL
+        public IEnumerable<JournalListViewModel> Lookup()
         {
-            get { return this._accountingDAL; }
-            set { this._accountingDAL = value; }
-        }
+            var results = this._db.AccountBook
+                              .Take(10)
+                              .Select(p => new JournalListViewModel()
+                              {
+                                  Category = p.Categoryyy.ToString(),
+                                  Date = p.Dateee,
+                                  Amount = p.Amounttt
+                              });
 
-        public IEnumerable<JournalListViewModel> GetJournal()
-        {
-            return this.AccountingDAL.GetJournal();
+            return results;
         }
     }
 }

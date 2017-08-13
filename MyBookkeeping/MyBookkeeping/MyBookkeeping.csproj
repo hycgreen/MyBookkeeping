@@ -149,9 +149,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="DAL\AccountingDAL.cs" />
     <Compile Include="BLL\AccountingService.cs" />
-    <Compile Include="DAL\IAccountingDAL.cs" />
     <Compile Include="BLL\IAccountingService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">

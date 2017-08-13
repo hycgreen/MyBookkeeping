@@ -1,13 +1,17 @@
-﻿using MyBookkeeping.BLL;
-using MyBookkeeping.Models.ViewModel;
-using System;
-using System.Collections.Generic;
+﻿using MyBookkeeping.Service;
 using System.Web.Mvc;
 
 namespace MyBookkeeping.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IAccountingService _accountingService;
+
+        public HomeController()
+        {
+            _accountingService = new AccountingService();
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -16,8 +20,7 @@ namespace MyBookkeeping.Controllers
         [ChildActionOnly]
         public ActionResult List()
         {
-            var logic = new AccountingService();
-            var models = logic.GetJournal();
+            var models = _accountingService.Lookup();
 
             return View(models);
         }
