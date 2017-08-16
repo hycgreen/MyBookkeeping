@@ -1,32 +1,54 @@
-﻿using MyBookkeeping.Models;
-using MyBookkeeping.Models.ViewModel;
+﻿using MyBookkeeping.Models.ViewModel;
+using MyBookkeeping.Repositories;
+using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 
 namespace MyBookkeeping.Service
 {
-    public class AccountingService : IAccountingService
+    public class AccountingService : IAccountingService, IDisposable
     {
-        private readonly BookkeppingContext _db;
-
+        private readonly IAccountingRepository _accountingRepository;
+        
         public AccountingService()
         {
-            this._db = new BookkeppingContext();
+            this._accountingRepository = new AccountingRepository();
         }
 
-        public IEnumerable<JournalListViewModel> Lookup()
+        public void Delete(Guid id)
         {
-            var results = this._db.AccountBook
-                              .Take(10)
-                              .Select(p => new JournalListViewModel()
-                              {
-                                  Category = p.Categoryyy.ToString(),
-                                  Date = p.Dateee,
-                                  Amount = p.Amounttt
-                              });
+            this._accountingRepository.Delete(id);
+            this._accountingRepository.Save();
+        }
+
+        public void Dispose()
+        {
+            this._accountingRepository.Dispose();
+        }
+
+        public IEnumerable<JournalListViewModel> GetAll()
+        {
+            var results = this._accountingRepository.GetAll();
 
             return results;
+        }
+
+        public JournalViewModel GetSingle(Guid id)
+        {
+            var result = this._accountingRepository.GetSingle(id);
+
+            return result;
+        }
+
+        public void Insert(JournalViewModel fromUI)
+        {
+            this._accountingRepository.Insert(fromUI);
+            this._accountingRepository.Save();
+        }
+
+        public void Update(JournalViewModel fromUI)
+        {
+            this._accountingRepository.Update(fromUI);
+            this._accountingRepository.Save();
         }
     }
 }

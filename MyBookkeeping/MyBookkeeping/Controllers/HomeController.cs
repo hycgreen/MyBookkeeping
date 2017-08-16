@@ -20,7 +20,7 @@ namespace MyBookkeeping.Controllers
         [ChildActionOnly]
         public ActionResult List()
         {
-            var models = _accountingService.Lookup();
+            var models = _accountingService.GetAll();
 
             return View(models);
         }

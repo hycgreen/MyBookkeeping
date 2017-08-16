@@ -1,10 +1,10 @@
-﻿using MyBookkeeping.Models.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using MyBookkeeping.Models.ViewModel;
 
-namespace MyBookkeeping.Service
+namespace MyBookkeeping.Repositories
 {
-    public interface IAccountingService
+    public interface IAccountingRepository : IDisposable
     {
         IEnumerable<JournalListViewModel> GetAll();
 
@@ -15,5 +15,7 @@ namespace MyBookkeeping.Service
         void Delete(Guid id);
 
         void Update(JournalViewModel fromUI);
+
+        void Save();
     }
 }
