@@ -4,8 +4,10 @@ using MyBookkeeping.Models.ViewModel;
 
 namespace MyBookkeeping.Repositories
 {
-    public interface IAccountingRepository : IDisposable
+    public interface IAccountingRepository
     {
+        IUnitOfWork UnitOfWork { get; set; }
+
         IEnumerable<JournalListViewModel> GetAll();
 
         JournalViewModel GetSingle(Guid id);

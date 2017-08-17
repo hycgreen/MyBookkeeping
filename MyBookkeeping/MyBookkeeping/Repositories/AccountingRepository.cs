@@ -2,30 +2,43 @@
 using MyBookkeeping.Models.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace MyBookkeeping.Repositories
 {
     public class AccountingRepository : IAccountingRepository
     {
-        private readonly BookkeppingContext _context;
-
-        public AccountingRepository()
+        public AccountingRepository(IUnitOfWork unitOfWork)
         {
-            this._context = new BookkeppingContext();
+            UnitOfWork = unitOfWork;
+        }
+        
+        public IUnitOfWork UnitOfWork { get; set; }
+
+        private DbSet<AccountBook> _accountBook;
+        private DbSet<AccountBook> AccountBook
+        {
+            get
+            {
+                if (_accountBook == null)
+                {
+                    _accountBook = UnitOfWork.Context.Set<AccountBook>();
+                }
+                return _accountBook;
+            }
         }
 
         public void Delete(Guid id)
         {
             var entity = new AccountBook() { Id = id };
-            this._context.AccountBook.Attach(entity);
-            this._context.AccountBook.Remove(entity);
+            this.AccountBook.Attach(entity);
+            this.AccountBook.Remove(entity);
         }
-
-
+        
         public IEnumerable<JournalListViewModel> GetAll()
         {
-            var results = this._context.AccountBook
+            var results = this.AccountBook
                               .Select(p => new JournalListViewModel()
                               {
                                   Category = p.Categoryyy.ToString(),
@@ -38,7 +51,7 @@ namespace MyBookkeeping.Repositories
 
         public JournalViewModel GetSingle(Guid id)
         {
-            var result = this._context.AccountBook
+            var result = this.AccountBook
                              .Where(p => p.Id == id)
                              .Select(p => new JournalViewModel()
                              {
@@ -66,12 +79,12 @@ namespace MyBookkeeping.Repositories
             entity.Amounttt = decimal.ToInt32(fromUI.Amount);
             entity.Remarkkk = fromUI.Remark;
 
-            this._context.AccountBook.Add(entity);
+            this.AccountBook.Add(entity);
         }
 
         public void Save()
         {
-            this._context.SaveChanges();
+            this.UnitOfWork.Save();
         }
 
         public void Update(JournalViewModel fromUI)
@@ -79,7 +92,7 @@ namespace MyBookkeeping.Repositories
             var entity = new AccountBook();
             entity.Id = fromUI.Id;
 
-            this._context.AccountBook.Attach(entity);
+            this.AccountBook.Attach(entity);
             int category;
             int.TryParse(fromUI.Category, out category);
             entity.Categoryyy = category;
@@ -87,27 +100,6 @@ namespace MyBookkeeping.Repositories
             entity.Dateee = fromUI.Date;
             entity.Amounttt = decimal.ToInt32(fromUI.Amount);
             entity.Remarkkk = fromUI.Remark;
-        }
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    this._context.Dispose();
-                }
-
-                this.disposed = true;
-            }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
     }
 }

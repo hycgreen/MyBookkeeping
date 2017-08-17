@@ -5,24 +5,20 @@ using System.Collections.Generic;
 
 namespace MyBookkeeping.Service
 {
-    public class AccountingService : IAccountingService, IDisposable
+    public class AccountingService : IAccountingService
     {
         private readonly IAccountingRepository _accountingRepository;
         
         public AccountingService()
         {
-            this._accountingRepository = new AccountingRepository();
+            var unitOfWork = new EFUnitOfWork();
+            this._accountingRepository = new AccountingRepository(unitOfWork);
         }
 
         public void Delete(Guid id)
         {
             this._accountingRepository.Delete(id);
             this._accountingRepository.Save();
-        }
-
-        public void Dispose()
-        {
-            this._accountingRepository.Dispose();
         }
 
         public IEnumerable<JournalListViewModel> GetAll()

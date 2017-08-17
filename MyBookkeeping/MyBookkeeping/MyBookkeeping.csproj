@@ -152,6 +152,7 @@
     <Compile Include="Models\ViewModel\JournalViewModel.cs" />
     <Compile Include="Repositories\AccountingRepository.cs" />
     <Compile Include="BLL\AccountingService.cs" />
+    <Compile Include="Repositories\EFUnitOfWork.cs" />
     <Compile Include="Repositories\IAccountingRepository.cs" />
     <Compile Include="BLL\IAccountingService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Models\BookkeppingContext.cs" />
     <Compile Include="Models\ViewModel\JournalListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\SkillTreeHomework.mdf" />
