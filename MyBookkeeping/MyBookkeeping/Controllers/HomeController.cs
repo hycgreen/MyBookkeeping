@@ -5,6 +5,7 @@ namespace MyBookkeeping.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly int _pageSize = 10;
         private readonly IAccountingService _accountingService;
 
         public HomeController()
@@ -18,9 +19,9 @@ namespace MyBookkeeping.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult List()
+        public ActionResult List(int pageIndex = 1)
         {
-            var models = _accountingService.GetAll();
+            var models = _accountingService.GetAll(pageIndex, this._pageSize);
 
             return View(models);
         }

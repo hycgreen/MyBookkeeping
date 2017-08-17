@@ -6,7 +6,7 @@ namespace MyBookkeeping.Service
 {
     public interface IAccountingService
     {
-        IEnumerable<JournalListViewModel> GetAll();
+        IEnumerable<JournalListViewModel> GetAll(int pageIndex, int pageSize);
 
         JournalViewModel GetSingle(Guid id);
 

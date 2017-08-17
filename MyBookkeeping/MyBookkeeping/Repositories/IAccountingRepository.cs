@@ -8,7 +8,7 @@ namespace MyBookkeeping.Repositories
     {
         IUnitOfWork UnitOfWork { get; set; }
 
-        IEnumerable<JournalListViewModel> GetAll();
+        IEnumerable<JournalListViewModel> GetAll(int pageIndex, int pageSize);
 
         JournalViewModel GetSingle(Guid id);
 

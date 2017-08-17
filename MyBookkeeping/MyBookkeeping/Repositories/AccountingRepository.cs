@@ -13,7 +13,7 @@ namespace MyBookkeeping.Repositories
         {
             UnitOfWork = unitOfWork;
         }
-        
+
         public IUnitOfWork UnitOfWork { get; set; }
 
         private DbSet<AccountBook> _accountBook;
@@ -35,16 +35,28 @@ namespace MyBookkeeping.Repositories
             this.AccountBook.Attach(entity);
             this.AccountBook.Remove(entity);
         }
-        
-        public IEnumerable<JournalListViewModel> GetAll()
+
+        public IEnumerable<JournalListViewModel> GetAll(int pageIndex, int pageSize)
+        {
+            var results = this.GetList()
+                              .OrderBy(p => p.Date)
+                              .Skip(pageIndex * pageSize)
+                              .Take(pageSize)
+                              .ToList();
+
+            return results;
+        }
+
+        private IQueryable<JournalListViewModel> GetList()
         {
             var results = this.AccountBook
                               .Select(p => new JournalListViewModel()
                               {
-                                  Category = p.Categoryyy.ToString(),
+                                  Category = (p.Categoryyy == 0) ? "支出" : "收入",
                                   Date = p.Dateee,
                                   Amount = p.Amounttt
-                              }).ToList();
+                              })
+                              .AsNoTracking();
 
             return results;
         }

@@ -21,9 +21,9 @@ namespace MyBookkeeping.Service
             this._accountingRepository.Save();
         }
 
-        public IEnumerable<JournalListViewModel> GetAll()
+        public IEnumerable<JournalListViewModel> GetAll(int pageIndex, int pageSize)
         {
-            var results = this._accountingRepository.GetAll();
+            var results = this._accountingRepository.GetAll(pageIndex, pageSize);
 
             return results;
         }
