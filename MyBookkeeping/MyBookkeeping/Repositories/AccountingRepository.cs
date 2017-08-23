@@ -68,7 +68,7 @@ namespace MyBookkeeping.Repositories
                              .Select(p => new JournalViewModel()
                              {
                                  Id = p.Id,
-                                 Category = p.Categoryyy.ToString(),
+                                 Category = (JournalCategory)p.Categoryyy,
                                  Date = p.Dateee,
                                  Amount = p.Amounttt,
                                  Remark = p.Remarkkk
@@ -82,10 +82,7 @@ namespace MyBookkeeping.Repositories
         {
             var entity = new AccountBook();
             entity.Id = fromUI.Id;
-
-            int.TryParse(fromUI.Category, out int category);
-            entity.Categoryyy = category;
-
+            entity.Categoryyy = (int)fromUI.Category;
             entity.Dateee = fromUI.Date;
             entity.Amounttt = decimal.ToInt32(fromUI.Amount);
             entity.Remarkkk = fromUI.Remark;
@@ -105,9 +102,7 @@ namespace MyBookkeeping.Repositories
 
             this.AccountBook.Attach(entity);
 
-            int.TryParse(fromUI.Category, out int category);
-            entity.Categoryyy = category;
-
+            entity.Categoryyy = (int) fromUI.Category;
             entity.Dateee = fromUI.Date;
             entity.Amounttt = decimal.ToInt32(fromUI.Amount);
             entity.Remarkkk = fromUI.Remark;

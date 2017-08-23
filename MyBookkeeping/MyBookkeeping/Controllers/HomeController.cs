@@ -1,5 +1,6 @@
 ﻿using MyBookkeeping.Service;
 using System.Web.Mvc;
+using MyBookkeeping.Models.ViewModel;
 using MyBookkeeping.Repositories;
 
 namespace MyBookkeeping.Controllers
@@ -18,6 +19,17 @@ namespace MyBookkeeping.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(JournalViewModel data)
+        {
+            if (this.ModelState.IsValid)
+            {
+                return View();
+            }
+
+            return View(data);
         }
 
         [ChildActionOnly]
