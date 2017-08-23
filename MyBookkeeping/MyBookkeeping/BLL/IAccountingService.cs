@@ -15,5 +15,7 @@ namespace MyBookkeeping.Service
         void Delete(Guid id);
 
         void Update(JournalViewModel fromUI);
+
+        void Save();
     }
 }

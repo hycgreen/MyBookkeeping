@@ -1,24 +1,24 @@
-﻿using MyBookkeeping.Models.ViewModel;
-using MyBookkeeping.Repositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using MyBookkeeping.Models.ViewModel;
+using MyBookkeeping.Repositories;
 
 namespace MyBookkeeping.Service
 {
     public class AccountingService : IAccountingService
     {
         private readonly IAccountingRepository _accountingRepository;
-        
-        public AccountingService()
+        private readonly IUnitOfWork _unitOfWork;
+
+        public AccountingService(IUnitOfWork unitOfWork)
         {
-            var unitOfWork = new EFUnitOfWork();
+            this._unitOfWork = unitOfWork;
             this._accountingRepository = new AccountingRepository(unitOfWork);
         }
 
         public void Delete(Guid id)
         {
             this._accountingRepository.Delete(id);
-            this._accountingRepository.Save();
         }
 
         public IEnumerable<JournalListViewModel> GetAll(int pageIndex, int pageSize)
@@ -38,13 +38,16 @@ namespace MyBookkeeping.Service
         public void Insert(JournalViewModel fromUI)
         {
             this._accountingRepository.Insert(fromUI);
-            this._accountingRepository.Save();
+        }
+
+        public void Save()
+        {
+            this._unitOfWork.Save();
         }
 
         public void Update(JournalViewModel fromUI)
         {
             this._accountingRepository.Update(fromUI);
-            this._accountingRepository.Save();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MyBookkeeping.Service;
 using System.Web.Mvc;
+using MyBookkeeping.Repositories;
 
 namespace MyBookkeeping.Controllers
 {
@@ -10,7 +11,8 @@ namespace MyBookkeeping.Controllers
 
         public HomeController()
         {
-            _accountingService = new AccountingService();
+            var unitOfWork = new EFUnitOfWork();
+            _accountingService = new AccountingService(unitOfWork);
         }
 
         public ActionResult Index()
