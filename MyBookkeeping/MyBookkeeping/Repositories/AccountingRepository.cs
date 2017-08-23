@@ -83,8 +83,7 @@ namespace MyBookkeeping.Repositories
             var entity = new AccountBook();
             entity.Id = fromUI.Id;
 
-            int category;
-            int.TryParse(fromUI.Category, out category);
+            int.TryParse(fromUI.Category, out int category);
             entity.Categoryyy = category;
 
             entity.Dateee = fromUI.Date;
@@ -105,8 +104,8 @@ namespace MyBookkeeping.Repositories
             entity.Id = fromUI.Id;
 
             this.AccountBook.Attach(entity);
-            int category;
-            int.TryParse(fromUI.Category, out category);
+
+            int.TryParse(fromUI.Category, out int category);
             entity.Categoryyy = category;
 
             entity.Dateee = fromUI.Date;
