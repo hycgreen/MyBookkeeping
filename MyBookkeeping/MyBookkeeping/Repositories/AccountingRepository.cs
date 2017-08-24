@@ -81,7 +81,7 @@ namespace MyBookkeeping.Repositories
         public void Insert(JournalViewModel fromUI)
         {
             var entity = new AccountBook();
-            entity.Id = fromUI.Id;
+            entity.Id = Guid.NewGuid();
             entity.Categoryyy = (int)fromUI.Category;
             entity.Dateee = fromUI.Date;
             entity.Amounttt = decimal.ToInt32(fromUI.Amount);

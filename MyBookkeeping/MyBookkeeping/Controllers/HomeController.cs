@@ -26,7 +26,10 @@ namespace MyBookkeeping.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                return View();
+                this._accountingService.Insert(data);
+                this._accountingService.Save();
+
+                return RedirectToAction("Index");
             }
 
             return View(data);
