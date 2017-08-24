@@ -1,0 +1,10 @@
+﻿@using MyBookkeeping.Helper
+@using MyBookkeeping.Models
+
+
+@helper DisplayCategory(JournalCategory category)
+{
+    <span class="@(category == JournalCategory.Income ? "text-primary" : "text-danger")">
+        @category.GetDisplayName()
+    </span>
+}

@@ -52,7 +52,7 @@ namespace MyBookkeeping.Repositories
             var results = this.AccountBook
                               .Select(p => new JournalListViewModel()
                               {
-                                  Category = (p.Categoryyy == 0) ? "支出" : "收入",
+                                  Category = (JournalCategory)p.Categoryyy,
                                   Date = p.Dateee,
                                   Amount = p.Amounttt
                               })
@@ -102,7 +102,7 @@ namespace MyBookkeeping.Repositories
 
             this.AccountBook.Attach(entity);
 
-            entity.Categoryyy = (int) fromUI.Category;
+            entity.Categoryyy = (int)fromUI.Category;
             entity.Dateee = fromUI.Date;
             entity.Amounttt = decimal.ToInt32(fromUI.Amount);
             entity.Remarkkk = fromUI.Remark;

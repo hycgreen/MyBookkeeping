@@ -149,6 +149,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ValidController.cs" />
+    <Compile Include="Helper\EnumExtensions.cs" />
     <Compile Include="Models\JournalCategory.cs" />
     <Compile Include="Models\ViewModel\JournalViewModel.cs" />
     <Compile Include="Repositories\AccountingRepository.cs" />
@@ -185,6 +186,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="App_Code\Journal.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
