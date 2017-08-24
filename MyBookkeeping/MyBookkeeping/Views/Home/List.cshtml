@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<MyBookkeeping.Models.ViewModel.JournalListViewModel>
+@using X.PagedList
+@using X.PagedList.Mvc
 @{
     Layout = "";
     int i = 0;
@@ -31,3 +33,4 @@
         </table>
     </div>
 </div>
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))

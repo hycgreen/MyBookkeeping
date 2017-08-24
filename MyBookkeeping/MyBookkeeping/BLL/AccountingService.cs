@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using MyBookkeeping.Models.ViewModel;
+﻿using MyBookkeeping.Models.ViewModel;
 using MyBookkeeping.Repositories;
+using System;
+using X.PagedList;
 
 namespace MyBookkeeping.Service
 {
@@ -21,9 +21,11 @@ namespace MyBookkeeping.Service
             this._accountingRepository.Delete(id);
         }
 
-        public IEnumerable<JournalListViewModel> GetAll(int pageIndex, int pageSize)
+        public IPagedList<JournalListViewModel> Lookup(int pageNumber, int pageSize)
         {
-            var results = this._accountingRepository.GetAll(pageIndex, pageSize);
+            var results = this._accountingRepository
+                              .LookupAll()
+                              .ToPagedList(pageNumber, pageSize);
 
             return results;
         }

@@ -1,7 +1,6 @@
 ﻿using MyBookkeeping.Models;
 using MyBookkeeping.Models.ViewModel;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
@@ -36,20 +35,10 @@ namespace MyBookkeeping.Repositories
             this.AccountBook.Remove(entity);
         }
 
-        public IEnumerable<JournalListViewModel> GetAll(int pageIndex, int pageSize)
-        {
-            var results = this.GetList()
-                              .OrderBy(p => p.Date)
-                              .Skip(pageIndex * pageSize)
-                              .Take(pageSize)
-                              .ToList();
-
-            return results;
-        }
-
-        private IQueryable<JournalListViewModel> GetList()
+        public IQueryable<JournalListViewModel> LookupAll()
         {
             var results = this.AccountBook
+                              .OrderByDescending(p => p.Dateee)
                               .Select(p => new JournalListViewModel()
                               {
                                   Category = (JournalCategory)p.Categoryyy,

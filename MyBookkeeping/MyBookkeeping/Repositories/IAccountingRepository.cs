@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MyBookkeeping.Models.ViewModel;
 
 namespace MyBookkeeping.Repositories
@@ -8,7 +9,7 @@ namespace MyBookkeeping.Repositories
     {
         IUnitOfWork UnitOfWork { get; set; }
 
-        IEnumerable<JournalListViewModel> GetAll(int pageIndex, int pageSize);
+        IQueryable<JournalListViewModel> LookupAll();
 
         JournalViewModel GetSingle(Guid id);
 

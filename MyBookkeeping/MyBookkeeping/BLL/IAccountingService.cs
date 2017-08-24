@@ -1,12 +1,12 @@
 ﻿using MyBookkeeping.Models.ViewModel;
 using System;
-using System.Collections.Generic;
+using X.PagedList;
 
 namespace MyBookkeeping.Service
 {
     public interface IAccountingService
     {
-        IEnumerable<JournalListViewModel> GetAll(int pageIndex, int pageSize);
+        IPagedList<JournalListViewModel> Lookup(int pageNumber, int pageSize);
 
         JournalViewModel GetSingle(Guid id);
 

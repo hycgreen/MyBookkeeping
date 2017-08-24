@@ -1,7 +1,7 @@
-﻿using MyBookkeeping.Service;
-using System.Web.Mvc;
-using MyBookkeeping.Models.ViewModel;
+﻿using MyBookkeeping.Models.ViewModel;
 using MyBookkeeping.Repositories;
+using MyBookkeeping.Service;
+using System.Web.Mvc;
 
 namespace MyBookkeeping.Controllers
 {
@@ -36,11 +36,18 @@ namespace MyBookkeeping.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult List(int pageIndex = 1)
+        public ActionResult List(int? page)
         {
-            var models = _accountingService.GetAll(pageIndex, this._pageSize);
+            if (page.HasValue && page < 1)
+                return HttpNotFound();
 
-            return View(models);
+            var list = this._accountingService
+                           .Lookup(page ?? 1, this._pageSize);
+
+            if (list.PageNumber != 1 && page.HasValue && page > list.PageCount)
+                return HttpNotFound();
+
+            return View(list);
         }
 
         public ActionResult About()
