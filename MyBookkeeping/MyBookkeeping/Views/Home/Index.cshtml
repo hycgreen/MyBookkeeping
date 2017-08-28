@@ -3,7 +3,12 @@
     ViewBag.Title = "Home Page";
 }
 <div class="form-horizontal">
-    @using (Html.BeginForm())
+    @using (Ajax.BeginForm(new AjaxOptions()
+    {
+        UpdateTargetId = "ajaxList",
+        LoadingElementDuration = 1000,
+        LoadingElementId = "ajaxLoading",        
+    }))
     {
         <div class="form-group">
             @Html.LabelFor(m => m.Category, htmlAttributes: new { @class = "col-sm-2 control-label" })
@@ -40,4 +45,14 @@
         </div>
     }
 </div>
-@Html.Action("List")
+<div class="ajax-content">
+    <div id="ajaxLoading">
+        <span><i class="fa fa-rocket fa-lg fa-pulse"></i> Loading...</span>
+    </div>
+    <div id="ajaxList">
+        @Html.Action("List")
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}

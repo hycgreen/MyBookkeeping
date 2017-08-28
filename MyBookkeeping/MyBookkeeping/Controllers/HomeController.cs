@@ -2,6 +2,7 @@
 using MyBookkeeping.Repositories;
 using MyBookkeeping.Service;
 using System.Web.Mvc;
+using MyBookkeeping.filter;
 
 namespace MyBookkeeping.Controllers
 {
@@ -29,10 +30,19 @@ namespace MyBookkeeping.Controllers
                 this._accountingService.Insert(data);
                 this._accountingService.Save();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("AjaxList");
             }
 
             return View(data);
+        }
+
+        [AjaxOnly]
+        public ActionResult AjaxList()
+        {
+            var list = this._accountingService
+                           .Lookup(1, this._pageSize);
+
+            return PartialView("List", list);
         }
 
         [ChildActionOnly]
