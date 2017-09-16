@@ -23,6 +23,7 @@ namespace MyBookkeeping.Models.ViewModel
         [Display(Name = "金額")]
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "{0} 請輸入正整數")]
+        [UIHint("CurrencySpinner")]
         public decimal Amount { get; set; }
 
         [Display(Name = "備註")]

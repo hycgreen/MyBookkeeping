@@ -7,7 +7,7 @@
     {
         UpdateTargetId = "ajaxList",
         LoadingElementDuration = 1000,
-        LoadingElementId = "ajaxLoading",        
+        LoadingElementId = "ajaxLoading",
     }))
     {
         <div class="form-group">
@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Amount, htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
-                @Html.TextBoxFor(m => m.Amount, htmlAttributes: new { @class = "form-control" })
+                @Html.EditorFor(m => m.Amount)
                 @Html.ValidationMessageFor(m => m.Amount)
             </div>
         </div>
@@ -56,4 +56,5 @@
 @section scripts{
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/datepicker.js"></script>
+    <script src="~/Scripts/currencyspinner.js"></script>
 }
