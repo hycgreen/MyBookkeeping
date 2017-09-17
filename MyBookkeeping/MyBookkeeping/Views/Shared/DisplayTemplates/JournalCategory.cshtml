@@ -1,0 +1,7 @@
+﻿@model MyBookkeeping.Models.JournalCategory?
+
+@using MyBookkeeping.Helper
+@if (Model.HasValue)
+{
+    @Model.Value.GetDisplayName()
+}

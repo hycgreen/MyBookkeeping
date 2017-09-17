@@ -1,4 +1,5 @@
-﻿using MyBookkeeping.Models.ViewModel;
+﻿using System;
+using MyBookkeeping.Models.ViewModel;
 using MyBookkeeping.Repositories;
 using MyBookkeeping.Service;
 using System.Web.Mvc;
@@ -60,18 +61,20 @@ namespace MyBookkeeping.Controllers
             return View(list);
         }
 
-        public ActionResult About()
+        public ActionResult Detail(Guid? ID)
         {
-            ViewBag.Message = "MVC5 Homework";
+            if (!ID.HasValue)
+                return HttpNotFound();
 
-            return View();
+            var model = this._accountingService
+                            .GetSingle(ID.Value);
+
+            return View(model);
         }
 
-        public ActionResult Contact()
+        public ActionResult Edit()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }

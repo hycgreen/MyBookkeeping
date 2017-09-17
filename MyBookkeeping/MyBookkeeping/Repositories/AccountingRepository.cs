@@ -3,6 +3,7 @@ using MyBookkeeping.Models.ViewModel;
 using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace MyBookkeeping.Repositories
 {
@@ -95,6 +96,25 @@ namespace MyBookkeeping.Repositories
             entity.Dateee = fromUI.Date;
             entity.Amounttt = decimal.ToInt32(fromUI.Amount);
             entity.Remarkkk = fromUI.Remark;
+        }
+
+        public ICollection<JournalViewModel> GetTop(int rowNumber)
+        {
+            var results = this.AccountBook
+                              .OrderByDescending(p => p.Dateee)
+                              .Take(rowNumber)
+                              .Select(p => new JournalViewModel()
+                              {
+                                  Id = p.Id,
+                                  Category = (JournalCategory)p.Categoryyy,
+                                  Date = p.Dateee,
+                                  Amount = p.Amounttt,
+                                  Remark = p.Remarkkk
+                              })
+                              .AsNoTracking()
+                              .ToList();
+
+            return results;
         }
     }
 }

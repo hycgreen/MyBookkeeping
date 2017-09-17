@@ -20,5 +20,7 @@ namespace MyBookkeeping.Repositories
         void Update(JournalViewModel fromUI);
 
         void Save();
+
+        ICollection<JournalViewModel> GetTop(int rowNumber);
     }
 }

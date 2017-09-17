@@ -1,6 +1,7 @@
-﻿using MyBookkeeping.Models.ViewModel;
+﻿using System;
+using System.Collections.Generic;
+using MyBookkeeping.Models.ViewModel;
 using MyBookkeeping.Repositories;
-using System;
 using X.PagedList;
 
 namespace MyBookkeeping.Service
@@ -50,6 +51,14 @@ namespace MyBookkeeping.Service
         public void Update(JournalViewModel fromUI)
         {
             this._accountingRepository.Update(fromUI);
+        }
+
+        public ICollection<JournalViewModel> GetFeeds(int rowNumber)
+        {
+            var results = this._accountingRepository
+                              .GetTop(rowNumber);
+
+            return results;
         }
     }
 }

@@ -1,5 +1,6 @@
-﻿using MyBookkeeping.Models.ViewModel;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using MyBookkeeping.Models.ViewModel;
 using X.PagedList;
 
 namespace MyBookkeeping.Service
@@ -9,6 +10,8 @@ namespace MyBookkeeping.Service
         IPagedList<JournalListViewModel> Lookup(int pageNumber, int pageSize);
 
         JournalViewModel GetSingle(Guid id);
+
+        ICollection<JournalViewModel> GetFeeds(int rowNumber);
 
         void Insert(JournalViewModel fromUI);
 

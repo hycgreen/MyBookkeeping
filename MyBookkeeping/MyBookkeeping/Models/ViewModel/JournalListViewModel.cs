@@ -9,7 +9,7 @@ namespace MyBookkeeping.Models.ViewModel
         public JournalCategory Category { get; set; }
 
         [Display(Name = "日期")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [UIHint("DateOnly")]
         public DateTime Date { get; set; }
 
         [Display(Name = "金額")]

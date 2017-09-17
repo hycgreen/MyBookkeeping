@@ -62,6 +62,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -154,7 +155,9 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\ValidController.cs" />
+    <Compile Include="CustomResults\RssResult.cs" />
     <Compile Include="filter\AjaxOnlyAttribute.cs" />
     <Compile Include="Helper\EnumExtensions.cs" />
     <Compile Include="Models\JournalCategory.cs" />
@@ -238,15 +241,16 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\List.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateOnly.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CurrencySpinner.cshtml" />
+    <Content Include="Views\Home\Detail.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\JournalCategory.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DateOnly.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Shared\DisplayTemplates\" />
+    <Folder Include="Views\Feed\" />
     <Folder Include="Views\Valid\" />
   </ItemGroup>
   <ItemGroup>

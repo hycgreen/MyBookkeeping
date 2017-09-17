@@ -15,9 +15,8 @@ namespace MyBookkeeping.Models.ViewModel
         [Display(Name = "日期")]
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:d}")]
         [Remote("EarlierThanToday", "Valid", ErrorMessage = "{0} 不得大於今天")]
-        [UIHint("Date")]
+        [UIHint("DateOnly")]
         public DateTime Date { get; set; }
 
         [Display(Name = "金額")]
