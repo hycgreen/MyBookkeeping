@@ -188,11 +188,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\JournalController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\ValidController.cs" />
     <Compile Include="CustomResults\RssResult.cs" />
     <Compile Include="filter\AjaxOnlyAttribute.cs" />
+    <Compile Include="filter\AuthorizePlusAttribute.cs" />
     <Compile Include="Helper\EnumExtensions.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\JournalCategory.cs" />
@@ -246,6 +248,10 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Journal\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Journal\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Journal\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Journal\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\datepicker.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -281,10 +287,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Journal\List.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateOnly.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CurrencySpinner.cshtml" />
-    <Content Include="Views\Home\Detail.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\JournalCategory.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateOnly.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
@@ -303,7 +308,6 @@
     <Content Include="Views\Account\VerifyCode.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Views\Feed\" />

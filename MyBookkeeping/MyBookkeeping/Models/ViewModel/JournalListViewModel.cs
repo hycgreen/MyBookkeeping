@@ -5,6 +5,8 @@ namespace MyBookkeeping.Models.ViewModel
 {
     public class JournalListViewModel
     {
+        public Guid Id { get; set; }
+
         [Display(Name = "類別")]
         public JournalCategory Category { get; set; }
 

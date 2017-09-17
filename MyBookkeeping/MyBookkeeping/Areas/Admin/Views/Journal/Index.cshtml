@@ -1,0 +1,65 @@
+﻿@model MyBookkeeping.Models.ViewModel.JournalViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-horizontal">
+    @using (Ajax.BeginForm(new AjaxOptions()
+    {
+        UpdateTargetId = "ajaxList",
+        LoadingElementDuration = 1000,
+        LoadingElementId = "ajaxLoading",
+    }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Category, htmlAttributes: new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.EnumDropDownListFor(m => m.Category, "請選擇", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Category)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Amount, htmlAttributes: new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(m => m.Amount)
+                @Html.ValidationMessageFor(m => m.Amount)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Date, htmlAttributes: new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(m => m.Date)
+                @Html.ValidationMessageFor(m => m.Date)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Remark, htmlAttributes: new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextAreaFor(m => m.Remark, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Remark)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-8 col-sm-4">
+                <input type="submit" value="送出" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+<div class="ajax-content">
+    <div id="ajaxLoading">
+        <span><i class="fa fa-rocket fa-lg fa-pulse"></i> Loading...</span>
+    </div>
+    <div id="ajaxList">
+        @Html.Action("List")
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/datepicker.js"></script>
+    <script src="~/Scripts/currencyspinner.js"></script>
+}

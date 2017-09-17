@@ -42,6 +42,7 @@ namespace MyBookkeeping.Repositories
                               .OrderByDescending(p => p.Dateee)
                               .Select(p => new JournalListViewModel()
                               {
+                                  Id = p.Id,
                                   Category = (JournalCategory)p.Categoryyy,
                                   Date = p.Dateee,
                                   Amount = p.Amounttt
@@ -71,7 +72,7 @@ namespace MyBookkeeping.Repositories
         public void Insert(JournalViewModel fromUI)
         {
             var entity = new AccountBook();
-            entity.Id = Guid.NewGuid();
+            entity.Id = fromUI.Id;
             entity.Categoryyy = (int)fromUI.Category;
             entity.Dateee = fromUI.Date;
             entity.Amounttt = decimal.ToInt32(fromUI.Amount);

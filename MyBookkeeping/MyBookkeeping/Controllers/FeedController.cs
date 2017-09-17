@@ -44,7 +44,7 @@ namespace MyBookkeeping.Controllers
                 var item = new SyndicationItem(
                                                $"{accountBook.Date:yyyy-MM-dd} {accountBook.Category.GetDisplayName()}",
                                                accountBook.Remark,
-                                               new Uri(Url.Action("Detail", "Home", new { id = accountBook.Id }, "http")),
+                                               new Uri(Url.Action("Details", "Journal", new { area = "Admin", id = accountBook.Id }, "http")),
                                                "ID",
                                                DateTime.Now);
 
