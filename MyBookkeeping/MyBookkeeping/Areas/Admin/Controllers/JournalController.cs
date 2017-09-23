@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MyBookkeeping.Areas.Admin.Controllers
 {
+    [AuthorizePlus]
     public class JournalController : Controller
     {
         private readonly int _pageSize = 10;
@@ -19,14 +20,13 @@ namespace MyBookkeeping.Areas.Admin.Controllers
             _accountingService = new AccountingService(unitOfWork);
         }
 
-
-        // GET: Admin/Journal
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Admin/Journal/Details/5
+        [AllowAnonymous]
         public ActionResult Details(Guid? id)
         {
             if (id == null)
@@ -43,9 +43,15 @@ namespace MyBookkeeping.Areas.Admin.Controllers
             return View(model);
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "Id,Category,Date,Amount,Remark")] JournalViewModel model)
+        [ChildActionOnly]
+        public ActionResult Create([Bind(Include = "Id,Category,Date,Amount,Remark")] JournalViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -69,6 +75,7 @@ namespace MyBookkeeping.Areas.Admin.Controllers
         }
 
         [ChildActionOnly]
+        [AllowAnonymous]
         public ActionResult List(int? page)
         {
             if (page.HasValue && page < 1)
@@ -84,7 +91,6 @@ namespace MyBookkeeping.Areas.Admin.Controllers
         }
 
 
-        // GET: Admin/Journal/Edit/5
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -101,9 +107,6 @@ namespace MyBookkeeping.Areas.Admin.Controllers
             return View(model);
         }
 
-        // POST: Admin/Journal/Edit/5
-        // 若要免於過量張貼攻擊，請啟用想要繫結的特定屬性，如需
-        // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Category,Date,Amount,Remark")] JournalViewModel model)
@@ -117,7 +120,6 @@ namespace MyBookkeeping.Areas.Admin.Controllers
             return View(model);
         }
 
-        // GET: Admin/Journal/Delete/5
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
@@ -134,7 +136,6 @@ namespace MyBookkeeping.Areas.Admin.Controllers
             return View(model);
         }
 
-        // POST: Admin/Journal/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)

@@ -252,6 +252,7 @@
     <Content Include="Areas\Admin\Views\Journal\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Journal\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Journal\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Journal\Create.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\datepicker.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

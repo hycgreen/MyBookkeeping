@@ -7,7 +7,7 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(new { area = "Admin" }))
 {
     @Html.AntiForgeryToken()
     
@@ -58,5 +58,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { area = "Admin" })
 </div>
