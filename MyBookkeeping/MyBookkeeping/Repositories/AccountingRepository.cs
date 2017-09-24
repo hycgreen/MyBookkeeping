@@ -36,18 +36,29 @@ namespace MyBookkeeping.Repositories
             this.AccountBook.Remove(entity);
         }
 
-        public IQueryable<JournalListViewModel> LookupAll()
+        public IQueryable<JournalListViewModel> LookupAll(int? year, int? month)
         {
-            var results = this.AccountBook
-                              .OrderByDescending(p => p.Dateee)
-                              .Select(p => new JournalListViewModel()
-                              {
-                                  Id = p.Id,
-                                  Category = (JournalCategory)p.Categoryyy,
-                                  Date = p.Dateee,
-                                  Amount = p.Amounttt
-                              })
-                              .AsNoTracking();
+            var queryable = this.AccountBook.AsQueryable();
+
+            if (year != null)
+            {
+                queryable = queryable.Where(x => x.Dateee.Year == year);
+            }
+
+            if (month != null)
+            {
+                queryable = queryable.Where(x => x.Dateee.Month == month);
+            }
+
+            var results = queryable.OrderByDescending(p => p.Dateee)
+                                   .Select(p => new JournalListViewModel()
+                                   {
+                                       Id = p.Id,
+                                       Category = (JournalCategory) p.Categoryyy,
+                                       Date = p.Dateee,
+                                       Amount = p.Amounttt
+                                   })
+                                   .AsNoTracking();
 
             return results;
         }

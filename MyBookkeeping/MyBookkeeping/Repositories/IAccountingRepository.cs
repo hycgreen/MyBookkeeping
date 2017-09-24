@@ -9,7 +9,7 @@ namespace MyBookkeeping.Repositories
     {
         IUnitOfWork UnitOfWork { get; set; }
 
-        IQueryable<JournalListViewModel> LookupAll();
+        IQueryable<JournalListViewModel> LookupAll(int? year, int? month);
 
         JournalViewModel GetSingle(Guid id);
 

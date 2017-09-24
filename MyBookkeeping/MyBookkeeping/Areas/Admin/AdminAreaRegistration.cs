@@ -15,6 +15,13 @@ namespace MyBookkeeping.Areas.Admin
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
+                             "skilltree_yearmonth",
+                             "skilltree/{year}/{month}",
+                             new { controller = "Journal", action = "Index" },
+                             constraints: new { year = @"\d+", month = @"\d+" }
+                            );
+
+            context.MapRoute(
                              "skilltree",
                              "skilltree/{action}/{id}",
                              new { controller = "Journal", action = "Index", id = UrlParameter.Optional }

@@ -7,7 +7,7 @@ namespace MyBookkeeping.Service
 {
     public interface IAccountingService
     {
-        IPagedList<JournalListViewModel> Lookup(int pageNumber, int pageSize);
+        IPagedList<JournalListViewModel> Lookup(int pageNumber, int pageSize, int? year, int? month);
 
         JournalViewModel GetSingle(Guid id);
 

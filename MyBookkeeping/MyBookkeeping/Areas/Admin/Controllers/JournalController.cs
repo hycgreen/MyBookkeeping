@@ -67,20 +67,20 @@ namespace MyBookkeeping.Areas.Admin.Controllers
         public ActionResult AjaxList()
         {
             var list = this._accountingService
-                           .Lookup(1, this._pageSize);
+                           .Lookup(1, this._pageSize, null, null);
 
             return PartialView("List", list);
         }
 
         [ChildActionOnly]
         [AllowAnonymous]
-        public ActionResult List(int? page)
+        public ActionResult List(int? year, int? month, int? page)
         {
             if (page.HasValue && page < 1)
                 return HttpNotFound();
 
             var list = this._accountingService
-                           .Lookup(page ?? 1, this._pageSize);
+                           .Lookup(page ?? 1, this._pageSize, year, month);
 
             if (list.PageNumber != 1 && page.HasValue && page > list.PageCount)
                 return HttpNotFound();

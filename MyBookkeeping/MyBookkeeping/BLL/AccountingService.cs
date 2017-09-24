@@ -22,10 +22,10 @@ namespace MyBookkeeping.Service
             this._accountingRepository.Delete(id);
         }
 
-        public IPagedList<JournalListViewModel> Lookup(int pageNumber, int pageSize)
+        public IPagedList<JournalListViewModel> Lookup(int pageNumber, int pageSize, int? year, int? month)
         {
             var results = this._accountingRepository
-                              .LookupAll()
+                              .LookupAll(year, month)
                               .ToPagedList(pageNumber, pageSize);
 
             return results;
