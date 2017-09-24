@@ -90,7 +90,7 @@ namespace MyBookkeeping.Areas.Admin.Controllers
             return View(list);
         }
 
-
+        [AuthorizePlus(Roles = "admin")]
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -120,6 +120,7 @@ namespace MyBookkeeping.Areas.Admin.Controllers
             return View(model);
         }
 
+        [AuthorizePlus(Roles = "admin")]
         public ActionResult Delete(Guid? id)
         {
             if (id == null)

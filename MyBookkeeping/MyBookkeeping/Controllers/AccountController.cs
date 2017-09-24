@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -80,6 +82,16 @@ namespace MyBookkeeping.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    var role = (model.Email == "admin@admin.admin") ? "admin" : "user";
+                    var claims = new List<Claim>();
+                    claims.Add(new Claim(ClaimTypes.Name, model.Email));
+                    claims.Add(new Claim(ClaimTypes.Email, model.Email));
+                    claims.Add(new Claim(ClaimTypes.Role, role));
+                    var identity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
+
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                    AuthenticationManager.SignIn(identity);
+
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
