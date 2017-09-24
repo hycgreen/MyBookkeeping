@@ -3,19 +3,32 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="form-horizontal">
-    @Html.Action("Create", new { area = "Admin" })
-</div>
 <div class="ajax-content">
     <div id="ajaxLoading">
         <span><i class="fa fa-rocket fa-lg fa-pulse"></i> Loading...</span>
     </div>
+    <div id="createForm" class="form-horizontal">
+        @Html.Action("Create")
+    </div>
     <div id="ajaxList">
-        @Html.Action("List", new { area = "Admin" })
+        @Html.Action("List")
     </div>
 </div>
+@Html.Hidden("ajaxUrl", Url.Action("AjaxList"))
 @section scripts{
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/datepicker.js"></script>
     <script src="~/Scripts/currencyspinner.js"></script>
+    <script>
+        function UpdateList() {
+            $.ajax({
+                type: "Get",
+                url: $("#ajaxUrl").val(),
+                dataType: "html",
+                success: function (response) {
+                    $("#ajaxList").html(response);
+                }
+            });
+        }
+    </script>
 }

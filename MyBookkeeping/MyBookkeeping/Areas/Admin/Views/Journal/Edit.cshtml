@@ -7,7 +7,7 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm(new { area = "Admin" }))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
@@ -58,5 +58,10 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index", new { area = "Admin" })
+    @Html.ActionLink("Back to List", "Index")
 </div>
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/datepicker.js"></script>
+    <script src="~/Scripts/currencyspinner.js"></script>
+}

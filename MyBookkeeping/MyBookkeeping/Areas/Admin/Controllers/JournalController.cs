@@ -43,6 +43,7 @@ namespace MyBookkeeping.Areas.Admin.Controllers
             return View(model);
         }
 
+        [ChildActionOnly]
         public ActionResult Create()
         {
             return View();
@@ -50,7 +51,6 @@ namespace MyBookkeeping.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ChildActionOnly]
         public ActionResult Create([Bind(Include = "Id,Category,Date,Amount,Remark")] JournalViewModel model)
         {
             if (ModelState.IsValid)
@@ -58,8 +58,6 @@ namespace MyBookkeeping.Areas.Admin.Controllers
                 model.Id = Guid.NewGuid();
                 this._accountingService.Insert(model);
                 this._accountingService.Save();
-
-                return RedirectToAction("AjaxList");
             }
 
             return View(model);
